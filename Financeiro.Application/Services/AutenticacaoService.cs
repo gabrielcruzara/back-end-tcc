@@ -1,0 +1,98 @@
+﻿using Financeiro.Application.Configurations;
+using Financeiro.Application.Model;
+using Financeiro.Application.Model.Autenticacao;
+using Financeiro.Application.Services.Interfaces;
+using Financeiro.Application.Util;
+using Financeiro.Domain.Autenticacao;
+using Financeiro.Domain.Repository;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Principal;
+using System.Threading.Tasks;
+
+namespace Financeiro.Application.Services
+{
+    public class AutenticacaoService : IAutenticacaoService
+    {
+        private readonly IAutenticacaoRepository _autenticacaoRepository;
+        private readonly SignInConfigurations _signingConfigurations;
+        private readonly TokenConfigurations _tokenConfigurations;
+        private readonly IUsuario _usuario;
+
+        public AutenticacaoService(IAutenticacaoRepository autenticacaoRepository, IUsuario usuario, SignInConfigurations signingConfigurations, TokenConfigurations tokenConfigurations)
+        {
+            _autenticacaoRepository = autenticacaoRepository;
+            _signingConfigurations = signingConfigurations;
+            _tokenConfigurations = tokenConfigurations;
+            _usuario = usuario;
+        }
+     
+        public async Task<BaseModel<DadosUsuarioModel.Response>> BuscarDadosUsuario(DadosUsuarioModel.Request request)
+        {
+            var query = await _autenticacaoRepository.BuscarDadosUsuario(request.Identificador);
+            var response = new DadosUsuarioModel.Response(query.NOME, query.EMAIL);
+
+            return new BaseModel<DadosUsuarioModel.Response>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, dados: response);
+        }
+
+        /*public async Task<BaseModel<LoginModel.Response>> Autenticar(LoginModel.Request request)
+        {
+            var registro = await _autenticacaoRepository.Autenticar(request.Login, request.Senha);
+
+            var dadosLogin = await _autenticacaoRepository.BuscarDadosUsuario(request.Login);
+
+            var loginModel = new LoginModel.Response(DadosUsuarioAdapter(dadosLogin), GerarToken(request.Login, _signingConfigurations, _tokenConfigurations));
+         
+             return new BaseModel<LoginModel.Response>(sucesso: true, mensagem: Mensagens.LoginRealizadoComSucesso, loginModel);
+        }*/
+
+        #region Jwt Utils
+        private JwtToken GerarToken(string Usuario, SignInConfigurations signingConfigurations, TokenConfigurations tokenConfigurations)
+        {
+            ClaimsIdentity identity = new ClaimsIdentity(
+                new GenericIdentity(Usuario, "Login"),
+                new[] {
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N"))
+                }
+            );
+
+            DateTime dataCriacao = DateTime.Now;
+            DateTime dataExpiracao = dataCriacao + TimeSpan.FromSeconds(tokenConfigurations.Seconds);
+
+            // Calcula o tempo máximo de validade do refresh token
+            // (o mesmo será invalidado automaticamente pelo Redis)
+            TimeSpan finalExpiration = TimeSpan.FromSeconds(tokenConfigurations.FinalExpiration);
+
+            var handler = new JwtSecurityTokenHandler();
+            var securityToken = handler.CreateToken(new SecurityTokenDescriptor
+            {
+                Issuer = tokenConfigurations.Issuer,
+                Audience = tokenConfigurations.Audience,
+                SigningCredentials = signingConfigurations.SigningCredentials,
+                Subject = identity,
+                NotBefore = dataCriacao,
+                Expires = dataExpiracao
+            });
+            var token = handler.WriteToken(securityToken);
+
+            var resultado = new JwtToken(
+                created: dataCriacao.ToString("yyyy-MM-dd HH:mm:ss"),
+                expiration: dataExpiracao.ToString("yyyy-MM-dd HH:mm:ss"),
+                accessToken: token,
+                refreshToken: Guid.NewGuid().ToString().Replace("-", String.Empty)
+            );
+
+            return resultado;
+        }
+
+        /*private DadosLoginModel DadosUsuarioAdapter(DadosLogin dados)
+        {
+            return new DadosLoginModel(dados.NOME, dados.EMAIL);
+        }*/
+
+        #endregion
+    }
+}
