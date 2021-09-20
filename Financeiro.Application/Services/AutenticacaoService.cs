@@ -30,24 +30,25 @@ namespace Financeiro.Application.Services
             _usuario = usuario;
         }
      
-        public async Task<BaseModel<DadosUsuarioModel.Response>> BuscarDadosUsuario(DadosUsuarioModel.Request request)
+
+        public async Task<BaseModel<LoginModel.Response>> Autenticar(LoginModel.Request request)
         {
+            var registro = await _autenticacaoRepository.Autenticar(request.Email, request.Senha);
+
+            //var dadosLogin = await _autenticacaoRepository.BuscarDadosUsuario(request.Email, request.Senha);
+
+            var loginModel = new LoginModel.Response(GerarToken(request.Email, _signingConfigurations, _tokenConfigurations));
+         
+             return new BaseModel<LoginModel.Response>(sucesso: true, mensagem: Mensagens.LoginRealizadoComSucesso, loginModel);
+        }
+
+        public async Task<BaseModel<DadosUsuarioModel.Response>> BuscarDadosUsuario(DadosUsuarioModel.Request request)
+{
             var query = await _autenticacaoRepository.BuscarDadosUsuario(request.Identificador);
             var response = new DadosUsuarioModel.Response(query.NOME, query.EMAIL);
 
             return new BaseModel<DadosUsuarioModel.Response>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, dados: response);
         }
-
-        /*public async Task<BaseModel<LoginModel.Response>> Autenticar(LoginModel.Request request)
-        {
-            var registro = await _autenticacaoRepository.Autenticar(request.Login, request.Senha);
-
-            var dadosLogin = await _autenticacaoRepository.BuscarDadosUsuario(request.Login);
-
-            var loginModel = new LoginModel.Response(DadosUsuarioAdapter(dadosLogin), GerarToken(request.Login, _signingConfigurations, _tokenConfigurations));
-         
-             return new BaseModel<LoginModel.Response>(sucesso: true, mensagem: Mensagens.LoginRealizadoComSucesso, loginModel);
-        }*/
 
         #region Jwt Utils
         private JwtToken GerarToken(string Usuario, SignInConfigurations signingConfigurations, TokenConfigurations tokenConfigurations)
@@ -88,9 +89,9 @@ namespace Financeiro.Application.Services
             return resultado;
         }
 
-        /*private DadosLoginModel DadosUsuarioAdapter(DadosLogin dados)
+        /*private DadosUsuarioModel DadosUsuarioAdapter(DadosUsuario dados)
         {
-            return new DadosLoginModel(dados.NOME, dados.EMAIL);
+            return new DadosUsuarioModel(dados.);
         }*/
 
         #endregion

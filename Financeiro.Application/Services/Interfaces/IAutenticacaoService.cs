@@ -6,7 +6,7 @@ namespace Financeiro.Application.Services.Interfaces
 {
     public interface IAutenticacaoService
     {
+        Task<BaseModel<LoginModel.Response>> Autenticar(LoginModel.Request request);
         Task<BaseModel<DadosUsuarioModel.Response>> BuscarDadosUsuario(DadosUsuarioModel.Request request);
-        //Task<BaseModel<LoginModel.Response>> Autenticar(LoginModel.Request request);
     }
 }

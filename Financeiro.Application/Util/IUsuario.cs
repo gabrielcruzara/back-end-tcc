@@ -5,6 +5,6 @@
         /// <summary>
         /// Retorna o login do usuário logado
         /// </summary>
-        string Login { get; }
+        string Email { get; }
     }
 }

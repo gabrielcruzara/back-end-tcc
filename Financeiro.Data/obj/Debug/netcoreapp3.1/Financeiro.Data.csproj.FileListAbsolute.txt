@@ -15,10 +15,6 @@ D:\Dev\TCC\conclusao-curso\Financeiro.API\Financeiro.Data\obj\Debug\netcoreapp3.
 D:\Dev\TCC\conclusao-curso\Financeiro.API\Financeiro.Data\obj\Debug\netcoreapp3.1\Financeiro.Data.dll
 D:\Dev\TCC\conclusao-curso\Financeiro.API\Financeiro.Data\obj\Debug\netcoreapp3.1\Financeiro.Data.pdb
 D:\Dev\TCC\conclusao-curso\Financeiro.API\Financeiro.Data\obj\Debug\netcoreapp3.1\Financeiro.Data.genruntimeconfig.cache
-D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\obj\Debug\netcoreapp3.1\Financeiro.Data.csprojAssemblyReference.cache
-D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\obj\Debug\netcoreapp3.1\Financeiro.Data.AssemblyInfoInputs.cache
-D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\obj\Debug\netcoreapp3.1\Financeiro.Data.AssemblyInfo.cs
-D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\obj\Debug\netcoreapp3.1\Financeiro.Data.csproj.CoreCompileInputs.cache
 D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\bin\Debug\netcoreapp3.1\Financeiro.Data.deps.json
 D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\bin\Debug\netcoreapp3.1\Financeiro.Data.runtimeconfig.json
 D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\bin\Debug\netcoreapp3.1\Financeiro.Data.runtimeconfig.dev.json
@@ -28,6 +24,10 @@ D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\bin\Debug\netcoreapp3.1\Finan
 D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\bin\Debug\netcoreapp3.1\Financeiro.Domain.dll
 D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\bin\Debug\netcoreapp3.1\Financeiro.Domain.pdb
 D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\bin\Debug\netcoreapp3.1\Financeiro.Core.pdb
+D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\obj\Debug\netcoreapp3.1\Financeiro.Data.csprojAssemblyReference.cache
+D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\obj\Debug\netcoreapp3.1\Financeiro.Data.AssemblyInfoInputs.cache
+D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\obj\Debug\netcoreapp3.1\Financeiro.Data.AssemblyInfo.cs
+D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\obj\Debug\netcoreapp3.1\Financeiro.Data.csproj.CoreCompileInputs.cache
 D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\obj\Debug\netcoreapp3.1\Financeiro.Data.csproj.CopyComplete
 D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\obj\Debug\netcoreapp3.1\Financeiro.Data.dll
 D:\Dev\back-end-tcc\Financeiro.API\Financeiro.Data\obj\Debug\netcoreapp3.1\Financeiro.Data.pdb

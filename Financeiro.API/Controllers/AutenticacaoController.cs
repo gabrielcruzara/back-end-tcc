@@ -22,17 +22,18 @@ namespace Financeiro.API.Controllers
             _autenticacaoService = autenticacaoService;
             _logger = logger;
         }
-
+        
         /// <summary>
-        /// Método de buscar dados do usuario no sistema
+        /// Método de autenticação no sistema
         /// </summary>
-        /// <returns>Busca dados do usuario</returns>
-        [HttpGet("busca-dados-usuario")]
-        public async Task<ActionResult<BaseModel<DadosUsuarioModel.Response>>> BuscarDadosUsuario([FromQuery] DadosUsuarioModel.Request request)
+        /// <param>Login e Senha</param>
+        /// <returns>Token de Acesso</returns>
+        [HttpPost("login")]
+        public async Task<ActionResult<BaseModel<LoginModel.Response>>> Login([FromBody] LoginModel.Request request)
         {
             try
             {
-                var response = await _autenticacaoService.BuscarDadosUsuario(request);
+                var response = await _autenticacaoService.Autenticar(request);
                 return Ok(response);
             }
             catch (Exception e)

@@ -1,5 +1,4 @@
-﻿
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text;
 
 namespace Financeiro.Core.Extensions

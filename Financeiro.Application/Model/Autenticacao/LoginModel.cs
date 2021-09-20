@@ -4,18 +4,18 @@
     {
         public class Request
         {
-            public string Login { get; set; }
+            public string Email { get; set; }
             public string Senha { get; set; }
         }
         public class Response
         {
-            public Response(DadosUsuarioModel dadosUsuario, JwtToken token)
+            public Response(JwtToken token)
             {
-                DadosUsuario = dadosUsuario;
+                //DadosUsuario = dadosUsuario;
                 Token = token;
             }
 
-            public DadosUsuarioModel DadosUsuario { get; set; }
+            //public DadosUsuarioModel DadosUsuario { get; set; }
             public JwtToken Token { get; private set; }
         }
     }
