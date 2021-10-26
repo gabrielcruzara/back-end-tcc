@@ -2,14 +2,14 @@
 {
     public class LoginModel
     {
-        public class Request
+        public partial class Login
         {
             public string Email { get; set; }
             public string Senha { get; set; }
         }
-        public class Response
+        public class Dados
         {
-            public Response(JwtToken token)
+            public Dados(JwtToken token)
             {
                 //DadosUsuario = dadosUsuario;
                 Token = token;

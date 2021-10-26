@@ -2,6 +2,8 @@
 using Financeiro.Application.Model.Servicos;
 using Financeiro.Application.Services.Interfaces;
 using Financeiro.Domain.Repository;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace Financeiro.Application.Services
@@ -15,12 +17,31 @@ namespace Financeiro.Application.Services
             _servicoRepository = servicoRepository;
         }
 
-        public async Task<BaseModel<CadastroServicoModel.Response>> BuscarServicosUsuario()
+        public async Task<BaseModel<List<BuscarServicos.Response>>> BuscarServicosUsuario(BuscarServicos.Request request)
         {
-            var query = await _servicoRepository.BuscarServicosUsuario();
-            var response = new CadastroServicoModel.Response(query.NOME_SERVICO, query.CUSTO_SERVICO, query.VALOR_COBRADO);
+            var response = new List<BuscarServicos.Response>();
+            var servicos = await _servicoRepository.BuscarServicosUsuario(request.IdentificadorUsuario);
 
-            return new BaseModel<CadastroServicoModel.Response>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, dados: response);
+            foreach (var servico in servicos)
+            {
+                response.Add(new BuscarServicos.Response(servico.ID_SERVICO, servico.ID_USUARIO, servico.NOME_SERVICO, servico.CUSTO_SERVICO, servico.VALOR_COBRADO));
+            }
+
+            return new BaseModel<List<BuscarServicos.Response>>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, response);
         }
+
+        public async Task<BaseModel> CadastraServico(CadastroServicoModel.Request request)
+        {
+            var query = await _servicoRepository.CadastraServico(request.IdentificadorUsuario, request.NomeServico, request.CustoServico, request.ValorCobrado);
+            var mensagem = new ValidationResult[] { new ValidationResult(query.MSG_ERRO) };
+
+            if (query.COD_ERRO != 0)
+            {
+                return new BaseModel(false, Mensagens.OperacaoRealizadaSemSucesso, null, mensagem);
+            }
+
+            return new BaseModel(true, Mensagens.OperacaoRealizadaComSucesso, null, mensagem);
+        }
+
     }
 }

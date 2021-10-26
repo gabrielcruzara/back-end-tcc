@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using System;
 using Financeiro.Domain.Autenticacao;
+using System.Data;
 
 namespace Financeiro.Data.Repository
 {
@@ -16,7 +17,7 @@ namespace Financeiro.Data.Repository
 
        public async Task<BaseEntity> Autenticar(string email, string senha)
        {
-            return await sqlConnection.QueryFirstOrDefaultAsync<BaseEntity>("EXEC SP_AUTENTICA_USUARIO @EMAIL, @SENHA", new { EMAIL = email, SENHA = senha });
+            return await sqlConnection.QueryFirstOrDefaultAsync<BaseEntity>("SP_AUTENTICA_USUARIO", new { EMAIL = email, SENHA = senha }, commandType: CommandType.StoredProcedure);
        }
 
        public async Task<DadosUsuario> BuscarDadosUsuario(string identificador)

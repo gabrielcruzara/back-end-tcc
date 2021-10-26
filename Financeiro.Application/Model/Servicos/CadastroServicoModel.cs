@@ -2,18 +2,12 @@
 {
     public class CadastroServicoModel
     {
-        public partial class Response
+        public class Request
         {
-            public Response(string nomeServico, int custoServico, int valorCobrado)
-            {
-                NomeServico = nomeServico;
-                CustoServico = custoServico;
-                ValorCobrado = valorCobrado;
-            }
-
+            public int IdentificadorUsuario { get; set; }
             public string NomeServico { get; set; }
-            public int CustoServico { get; set; }
-            public int ValorCobrado { get; set; }
+            public decimal CustoServico { get; set; }
+            public decimal ValorCobrado { get; set; }
         }
     }
 }

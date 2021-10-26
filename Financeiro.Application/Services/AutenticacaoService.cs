@@ -31,15 +31,18 @@ namespace Financeiro.Application.Services
         }
      
 
-        public async Task<BaseModel<LoginModel.Response>> Autenticar(LoginModel.Request request)
+        public async Task<BaseModel<LoginModel.Dados>> Autenticar(LoginModel.Login request)
         {
             var registro = await _autenticacaoRepository.Autenticar(request.Email, request.Senha);
+            var loginModel = new LoginModel.Dados(GerarToken(request.Email, _signingConfigurations, _tokenConfigurations));
 
+            if (registro.COD_ERRO != 0)
+            {
+                return new BaseModel<LoginModel.Dados>(sucesso: false, mensagem: Mensagens.LoginInvalido);
+            }
             //var dadosLogin = await _autenticacaoRepository.BuscarDadosUsuario(request.Email, request.Senha);
 
-            var loginModel = new LoginModel.Response(GerarToken(request.Email, _signingConfigurations, _tokenConfigurations));
-         
-             return new BaseModel<LoginModel.Response>(sucesso: true, mensagem: Mensagens.LoginRealizadoComSucesso, loginModel);
+            return new BaseModel<LoginModel.Dados>(sucesso: true, mensagem: Mensagens.LoginRealizadoComSucesso, loginModel);
         }
 
         public async Task<BaseModel<DadosUsuarioModel.Response>> BuscarDadosUsuario(DadosUsuarioModel.Request request)

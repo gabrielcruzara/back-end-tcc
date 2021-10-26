@@ -12,14 +12,5 @@ namespace Financeiro.Application.Model.Autenticacao
             public string CPF { get; set; }
             public string DataNascimento { get; set; }
         }
-
-        public class Response : BaseEntity
-        {
-            public Response(int codErro, string msgErro)
-            {
-                CodErro = codErro;
-                MsgErro = msgErro;
-            }
-        }
     }
 }

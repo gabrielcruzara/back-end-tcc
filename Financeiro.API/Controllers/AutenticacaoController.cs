@@ -29,7 +29,7 @@ namespace Financeiro.API.Controllers
         /// <param>Login e Senha</param>
         /// <returns>Token de Acesso</returns>
         [HttpPost("login")]
-        public async Task<ActionResult<BaseModel<LoginModel.Response>>> Login([FromBody] LoginModel.Request request)
+        public async Task<ActionResult<BaseModel<LoginModel.Dados>>> Login([FromBody] LoginModel.Login request)
         {
             try
             {

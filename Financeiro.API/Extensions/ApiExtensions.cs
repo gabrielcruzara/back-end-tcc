@@ -31,6 +31,9 @@ namespace Financeiro.API.Extensions
             // autenticação
             services.AddScoped<IAutenticacaoService, AutenticacaoService>();
             services.AddScoped<IAutenticacaoRepository, AutenticacaoRepository>();
+
+            services.AddScoped<IServicoService, ServicoService>();
+            services.AddScoped<IServicoRepository, ServicoRepository>();
         }
 
         public static void AddApiVersioningConfiguration(this IServiceCollection services)
