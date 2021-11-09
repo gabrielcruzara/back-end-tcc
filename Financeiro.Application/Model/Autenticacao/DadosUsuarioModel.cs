@@ -2,20 +2,15 @@
 {
     public class DadosUsuarioModel
     {
-        public class Request
-        {
-            public string Identificador { get; set; }
-        }
-        public class Response
-        {
-            public Response(string email, string nome)
+            public DadosUsuarioModel(string email, string nome, int id)
             {
                 Email = email;
                 Nome = nome;
+                Id = id;
             }
 
             public string Email { get; private set; }
             public string Nome { get; private set; }
-        }
+            public int Id { get; set; }
     }
 }

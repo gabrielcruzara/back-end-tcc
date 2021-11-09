@@ -7,7 +7,7 @@ namespace Financeiro.Application.Services.Interfaces
 {
     public interface IServicoService
     {
-        Task<BaseModel<List<BuscarServicos.Response>>> BuscarServicosUsuario(BuscarServicos.Request request);
+        Task<BaseModel<List<BuscarServicosModel.Response>>> BuscarServicosUsuario();
         Task<BaseModel> CadastraServico(CadastroServicoModel.Request request);
     }
 }

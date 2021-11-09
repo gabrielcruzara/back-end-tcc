@@ -9,13 +9,13 @@
         }
         public class Dados
         {
-            public Dados(JwtToken token)
+            public Dados(DadosUsuarioModel dadosUsuario, JwtToken token)
             {
-                //DadosUsuario = dadosUsuario;
+                DadosUsuario = dadosUsuario;
                 Token = token;
             }
 
-            //public DadosUsuarioModel DadosUsuario { get; set; }
+            public DadosUsuarioModel DadosUsuario { get; set; }
             public JwtToken Token { get; private set; }
         }
     }

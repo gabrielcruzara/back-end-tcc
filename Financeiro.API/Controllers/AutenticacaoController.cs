@@ -43,5 +43,20 @@ namespace Financeiro.API.Controllers
             }
         }
         //coment
+
+        [HttpPost("cadastrar-usuario")]
+        public async Task<ActionResult<BaseModel>> CadastraUsuario([FromBody] CadastroModel.Cadastro request)
+        {
+            try
+            {
+                var response = await _autenticacaoService.CadastraUsuario(request);
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, e.Message, request);
+                return new StatusCodeResult(400);
+            }
+        }
     }
 }

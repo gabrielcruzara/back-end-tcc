@@ -3,6 +3,7 @@ using Financeiro.Application.Util;
 using Financeiro.Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,14 +24,23 @@ namespace Financeiro.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.RequireHeaderSymmetry = false;
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+                options.KnownNetworks.Clear();
+                options.KnownProxies.Clear();
+            });
+
+            services.AddDbContext<DatabaseContext>();
+
+            services.AddHttpContextAccessor();
+            services.AddScoped<IUsuario, Usuario>();
 
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "wwwroot";
             });
-
-            services.AddHttpContextAccessor();
-            services.AddScoped<IUsuario, Usuario>();
 
             //api extensions
             services.RegisterDependencyInjection();
@@ -50,43 +60,47 @@ namespace Financeiro.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto });
+
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+
+            app.UseDeveloperExceptionPage();
+
+            app.UseForwardedHeaders();
+
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            app.UseHttpsRedirection();
+
+            app.UseResponseCompression();
+
+            app.UseRouting();
+
+            app.UseAuthentication()
+               .UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                app.UseDeveloperExceptionPage();
+                endpoints.MapControllers();
+            });
 
-                app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "FINANCEIRO API");
+                c.RoutePrefix = "api/swagger";
+            });
 
-                app.UseStaticFiles();
+             app.UseSpa(spa =>
+             {
+                spa.Options.SourcePath = Path.Combine(Directory.GetCurrentDirectory(), "Financeiro-UI");
 
-                app.UseSpaStaticFiles();
-
-                app.UseHttpsRedirection();
-
-                app.UseRouting();
-
-                app.UseAuthorization();
-
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                });
-
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "FINANCEIRO API");
-                    c.RoutePrefix = "api/swagger";
-                });
-
-                app.UseSpa(spa =>
-                {
-                    spa.Options.SourcePath = Path.Combine(Directory.GetCurrentDirectory(), "Financeiro-UI");
-
-                    spa.Options.SourcePath = "wwwroot";
-                    if (Configuration.GetValue<bool>("UseAngularCliDeveloperServer"))
+                spa.Options.SourcePath = "wwwroot";
+                  if (Configuration.GetValue<bool>("UseAngularCliDeveloperServer"))
                         spa.UseProxyToSpaDevelopmentServer(Configuration.GetValue<string>("AngularCliDeveloperServer"));
-                });
-            }
+             });
         }
     }
 }

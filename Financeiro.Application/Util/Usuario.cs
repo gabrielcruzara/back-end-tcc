@@ -19,7 +19,7 @@ namespace Financeiro.Application.Util
         /// 
         /// </summary>
         public string Email => _accessor.HttpContext.User.Identity.Name;
-
+    
         public string Device => _accessor.HttpContext.Request.Headers["User-Agent"].ToString();
     }
 }

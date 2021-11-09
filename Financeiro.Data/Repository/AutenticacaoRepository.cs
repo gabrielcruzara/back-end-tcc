@@ -20,9 +20,14 @@ namespace Financeiro.Data.Repository
             return await sqlConnection.QueryFirstOrDefaultAsync<BaseEntity>("SP_AUTENTICA_USUARIO", new { EMAIL = email, SENHA = senha }, commandType: CommandType.StoredProcedure);
        }
 
-       public async Task<DadosUsuario> BuscarDadosUsuario(string identificador)
+       public async Task<DadosUsuario> BuscarDadosUsuario(string email)
         {
-            return await sqlConnection.QueryFirstOrDefaultAsync<DadosUsuario>("SP_BUSCA_DADOS_USUARIO @ID_USUARIO", new { ID_USUARIO = identificador });
+            return await sqlConnection.QueryFirstOrDefaultAsync<DadosUsuario>("SP_BUSCA_DADOS_USUARIO_POR_EMAIL @EMAIL", new { EMAIL = email });
+        }
+
+        public async Task<BaseEntity> CadastraUsuario(string email, string nome, string senha)
+        {
+            return await sqlConnection.QueryFirstOrDefaultAsync<BaseEntity>("SP_CADASTRA_USUARIO", new { EMAIL = email, NOME = nome, SENHA = senha }, commandType: CommandType.StoredProcedure);
         }
     }
 }

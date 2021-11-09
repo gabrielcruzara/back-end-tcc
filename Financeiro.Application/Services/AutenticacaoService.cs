@@ -8,6 +8,7 @@ using Financeiro.Domain.Repository;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
@@ -34,23 +35,38 @@ namespace Financeiro.Application.Services
         public async Task<BaseModel<LoginModel.Dados>> Autenticar(LoginModel.Login request)
         {
             var registro = await _autenticacaoRepository.Autenticar(request.Email, request.Senha);
-            var loginModel = new LoginModel.Dados(GerarToken(request.Email, _signingConfigurations, _tokenConfigurations));
 
-            if (registro.COD_ERRO != 0)
+            if (registro.COD_ERRO == 0)
             {
-                return new BaseModel<LoginModel.Dados>(sucesso: false, mensagem: Mensagens.LoginInvalido);
+                var dadosLogin = await _autenticacaoRepository.BuscarDadosUsuario(request.Email);
+                
+                var loginModel = new LoginModel.Dados(DadosUsuarioAdapter(dadosLogin), GerarToken(request.Email, _signingConfigurations, _tokenConfigurations));
+                
+                return new BaseModel<LoginModel.Dados>(sucesso: true, mensagem: Mensagens.LoginRealizadoComSucesso, loginModel);
             }
-            //var dadosLogin = await _autenticacaoRepository.BuscarDadosUsuario(request.Email, request.Senha);
-
-            return new BaseModel<LoginModel.Dados>(sucesso: true, mensagem: Mensagens.LoginRealizadoComSucesso, loginModel);
+            
+            return new BaseModel<LoginModel.Dados>(sucesso: false, mensagem: Mensagens.LoginInvalido);
         }
 
-        public async Task<BaseModel<DadosUsuarioModel.Response>> BuscarDadosUsuario(DadosUsuarioModel.Request request)
+       /* public async Task<BaseModel<DadosUsuarioModel.Response>> BuscarDadosUsuario(DadosUsuarioModel.Request request)
 {
             var query = await _autenticacaoRepository.BuscarDadosUsuario(request.Identificador);
             var response = new DadosUsuarioModel.Response(query.NOME, query.EMAIL);
 
             return new BaseModel<DadosUsuarioModel.Response>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, dados: response);
+        }*/
+
+        public async Task<BaseModel> CadastraUsuario(CadastroModel.Cadastro request)
+        {
+            var query = await _autenticacaoRepository.CadastraUsuario(request.Email, request.Nome, request.Senha);
+            var mensagem = new ValidationResult[] { new ValidationResult(query.MSG_ERRO) };
+
+            if (query.COD_ERRO != 0)
+            {
+                return new BaseModel(false, Mensagens.OperacaoRealizadaSemSucesso, null, mensagem);
+            }
+
+            return new BaseModel(true, Mensagens.OperacaoRealizadaComSucesso, null, mensagem);
         }
 
         #region Jwt Utils
@@ -96,6 +112,12 @@ namespace Financeiro.Application.Services
         {
             return new DadosUsuarioModel(dados.);
         }*/
+
+        private DadosUsuarioModel DadosUsuarioAdapter(DadosUsuario dados)
+        {
+            return new DadosUsuarioModel(dados.EMAIL, dados.NOME, dados.ID_USUARIO);
+        }
+
 
         #endregion
     }

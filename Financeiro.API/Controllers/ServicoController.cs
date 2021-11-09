@@ -15,7 +15,7 @@ namespace Financeiro.API.Controllers
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-
+    [Authorize]
 
     public class ServicoController : ControllerBase
     {
@@ -29,16 +29,16 @@ namespace Financeiro.API.Controllers
         }
 
         [HttpGet("buscar-servicos")]
-        public async Task<ActionResult<BaseModel<BuscarServicos.Response>>> BuscarServicosUsuario([FromQuery] BuscarServicos.Request request)
+        public async Task<ActionResult<BaseModel<BuscarServicosModel.Response>>> BuscarServicosUsuario()
         {
             try
             {
-                var response = await _servicoService.BuscarServicosUsuario(request);
+                var response = await _servicoService.BuscarServicosUsuario();
                 return Ok(response);
             }
             catch (Exception e)
             {
-                _logger.LogError(e, e.Message, request);
+                _logger.LogError(e, e.Message);
                 return new StatusCodeResult(400);
             }
         }

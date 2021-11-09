@@ -6,6 +6,7 @@ namespace Financeiro.Domain.Repository
     public interface IAutenticacaoRepository
     {
         Task<BaseEntity> Autenticar(string email, string senha);
-        Task<DadosUsuario> BuscarDadosUsuario(string identificador);
+        Task<DadosUsuario> BuscarDadosUsuario(string email);
+        Task<BaseEntity> CadastraUsuario(string email, string nome, string senha);
     }
 }

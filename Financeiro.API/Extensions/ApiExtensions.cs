@@ -36,6 +36,7 @@ namespace Financeiro.API.Extensions
             services.AddScoped<IServicoRepository, ServicoRepository>();
         }
 
+        /// 
         public static void AddApiVersioningConfiguration(this IServiceCollection services)
         {
             services.AddApiVersioning(options =>
@@ -51,53 +52,51 @@ namespace Financeiro.API.Extensions
                 options.SubstituteApiVersionInUrl = true;
             });
         }
-
-        public static void AddSwaggerConfiguration(this IServiceCollection services)
+        /// 
+        public static void AddSwaggerConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
+            var config = configuration.GetSection("AuthConfiguration");
             services.AddSwaggerGen(c =>
             {
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = config.GetSection("Client").GetValue<string>("OAuthAppName"), Version = "v1" });
+
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
-                    Description = "Copie 'Bearer ' + token'",
                     Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey,
-                    BearerFormat = "JWT",
-                    Scheme = "Bearer"
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        Implicit = new OpenApiOAuthFlow
+                        {
+                            TokenUrl = new Uri(config.GetValue<string>("IdentityServer") + "/oauth2/v2.0/token"),
+                            AuthorizationUrl = new Uri(config.GetValue<string>("IdentityServer") + "/connect/authorize", UriKind.Absolute),
+                            Scopes = new Dictionary<string, string> {
+                                { "APIAccess", "Acesso - API Finansys" }
+                            },
+                        }
+                    }
                 });
-
-
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
                 {
                     {
                         new OpenApiSecurityScheme
                         {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            }
+                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
                         },
-                        new string[] {}
+                        new[] { "APIAccess" }
                     }
                 });
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Title = "FINANCEIRO TCC API",
-                    Description = "API do Projeto TCC",
-                    Version = "v1",
-                    Contact = new OpenApiContact()
-                    {
-                        Name = "TCC",
-                    }
-                });
-                // c.OperationFilter<CustomHeaderSwaggerAttribute>();
-
                 c.OperationFilter<AuthResponsesOperationFilter>();
+
+                string xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+                c.IncludeXmlComments(xmlPath);
             });
 
         }
-
+        /// 
         public static void AddResponseCompressionProvider(this IServiceCollection services)
         {
             services.Configure<GzipCompressionProviderOptions>(
@@ -110,7 +109,7 @@ namespace Financeiro.API.Extensions
             });
 
         }
-
+        /// 
         public static void AddJwtAuthenticationConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             var tokenConfigurations = new TokenConfigurations();
@@ -152,9 +151,66 @@ namespace Financeiro.API.Extensions
                 paramsValidation.ClockSkew = TimeSpan.Zero;
             });
         }
+
+        /// 
+        public static void AddSwaggerConfiguration(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Copie 'Bearer ' + token'",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer"
+                });
+
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] {}
+                    }
+                });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "AutoValor API",
+                    Description = "API do TCC - Auto Valor",
+                    Version = "v1",
+                    Contact = new OpenApiContact()
+                    {
+                        Name = "AutoValor",
+                    }
+                });
+                // c.OperationFilter<CustomHeaderSwaggerAttribute>();
+
+                c.OperationFilter<AuthResponsesOperationFilter>();
+
+               /* string xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+                c.IncludeXmlComments(xmlPath);
+                c.CustomSchemaIds(i => i.FullName);*/
+
+            });
+
+        }
+
+        /// 
         public static string GetHeader(this HttpRequest request, string key)
         {
             return request.Headers.FirstOrDefault(x => x.Key == key).Value.FirstOrDefault();
         }
     }
+
 }
