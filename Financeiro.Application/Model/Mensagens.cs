@@ -7,7 +7,7 @@ namespace Financeiro.Application.Model
         [Description("Login realizado com sucesso")]
         LoginRealizadoComSucesso = 1,
 
-        [Description("Login ou senha inválidos")]
+        [Description("E-mail ou senha inválidos")]
         LoginInvalido = 2,
 
         [Description("Você deve alterar sua senha")]

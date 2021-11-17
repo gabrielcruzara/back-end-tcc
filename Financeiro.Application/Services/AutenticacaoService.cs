@@ -115,10 +115,8 @@ namespace Financeiro.Application.Services
 
         private DadosUsuarioModel DadosUsuarioAdapter(DadosUsuario dados)
         {
-            return new DadosUsuarioModel(dados.EMAIL, dados.NOME, dados.ID_USUARIO);
+            return new DadosUsuarioModel(dados.EMAIL, dados.NOME);
         }
-
-
         #endregion
     }
 }

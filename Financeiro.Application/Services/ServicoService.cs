@@ -27,7 +27,7 @@ namespace Financeiro.Application.Services
 
             foreach (var servico in servicos)
             {
-                response.Add(new BuscarServicosModel.Response(servico.ID_SERVICO, servico.ID_USUARIO, servico.NOME_SERVICO, servico.CUSTO_SERVICO, servico.VALOR_COBRADO));
+                response.Add(new BuscarServicosModel.Response(servico.ID_SERVICO, servico.EMAIL_USUARIO, servico.NOME_SERVICO, servico.CUSTO_SERVICO, servico.VALOR_COBRADO));
             }
 
             return new BaseModel<List<BuscarServicosModel.Response>>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, response);
@@ -45,6 +45,5 @@ namespace Financeiro.Application.Services
 
             return new BaseModel(true, Mensagens.OperacaoRealizadaComSucesso, null, mensagem);
         }
-
     }
 }

@@ -18,12 +18,12 @@ namespace Financeiro.Data.Repository
 
         public async Task<IEnumerable<CadastroServico>> BuscarServicosUsuario(string email)
         {
-            return await sqlConnection.QueryAsync<CadastroServico>("SP_LISTA_SERVICOS_USUARIO", new { EMAIL = email }, commandType: CommandType.StoredProcedure);
+            return await sqlConnection.QueryAsync<CadastroServico>("SP_LISTA_SERVICOS_USUARIO", new { EMAIL_USUARIO = email }, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<BaseEntity> CadastraServico(string email, string nomeServico, decimal custoServico, decimal valorCobrado)
         {
-            return await sqlConnection.QueryFirstOrDefaultAsync<BaseEntity>("SP_CADASTRA_SERVICO", new { EMAIL = email, NOME_SERVICO = nomeServico, CUSTO_SERVICO = custoServico, VALOR_COBRADO = valorCobrado }, commandType: CommandType.StoredProcedure);
+            return await sqlConnection.QueryFirstOrDefaultAsync<BaseEntity>("SP_CADASTRA_SERVICO", new { EMAIL_USUARIO = email, NOME_SERVICO = nomeServico, CUSTO_SERVICO = custoServico, VALOR_COBRADO = valorCobrado }, commandType: CommandType.StoredProcedure);
         }
     }
 }
