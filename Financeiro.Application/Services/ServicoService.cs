@@ -45,5 +45,68 @@ namespace Financeiro.Application.Services
 
             return new BaseModel(true, Mensagens.OperacaoRealizadaComSucesso, null, mensagem);
         }
+
+        public async Task<BaseModel> EditarServico(CadastroServicoModel.Request request)
+        {
+            var query = await _servicoRepository.EditarServico(request.identificadorServico, request.NomeServico, request.CustoServico, request.ValorCobrado);
+            var mensagem = new ValidationResult[] { new ValidationResult(query.MSG_ERRO) };
+
+            if (query.COD_ERRO != 0)
+            {
+                return new BaseModel(false, Mensagens.OperacaoRealizadaSemSucesso, null, mensagem);
+            }
+
+            return new BaseModel(true, Mensagens.OperacaoRealizadaComSucesso, null, mensagem);
+        }
+
+        public async Task<BaseModel> ExcluirServico(CadastroServicoModel.Request request)
+        {
+            var query = await _servicoRepository.ExcluirServico(request.identificadorServico);
+            var mensagem = new ValidationResult[] { new ValidationResult(query.MSG_ERRO) };
+
+            if (query.COD_ERRO != 0)
+            {
+                return new BaseModel(false, Mensagens.OperacaoRealizadaSemSucesso, null, mensagem);
+            }
+
+            return new BaseModel(true, Mensagens.OperacaoRealizadaComSucesso, null, mensagem);
+        }
+
+        public async Task<BaseModel> IniciaServico(ServicoModel.Inicia request)
+        {
+            var query = await _servicoRepository.IniciaServico(_usuario.Email, request.IdentificadorServico);
+            var mensagem = new ValidationResult[] { new ValidationResult(query.MSG_ERRO) };
+
+            if (query.COD_ERRO != 0)
+            {
+                return new BaseModel(false, Mensagens.OperacaoRealizadaSemSucesso, null, mensagem);
+            }
+
+            return new BaseModel(true, Mensagens.OperacaoRealizadaComSucesso, null, mensagem);
+        }
+
+        public async Task<BaseModel<List<ServicoModel.Execucao>>> ServicoExecucao()
+        {
+            var response = new List<ServicoModel.Execucao>();
+            var servicos = await _servicoRepository.ServicoExecucao(_usuario.Email);
+
+            foreach (var servico in servicos)
+            {
+                response.Add(new ServicoModel.Execucao(servico.ID_HISTORICO_SERVICO, servico.NOME_SERVICO, servico.CUSTO_SERVICO, servico.VALOR_COBRADO, servico.QUANTIDADE, servico.HORA_INICIO, servico.OBSERVACAO));
+            }
+
+            return new BaseModel<List<ServicoModel.Execucao>>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, response);
+        }
+
+        /*public async Task<BaseModel<ServicoModel.Total>> TotalServicos()
+        {
+            var dados = new ServicoModel();
+
+            var query = await _servicoRepository.TotalServicos(_usuario.Email);
+
+            new ServicoModel.Total(query.QTDSERVICOS);
+
+            return new BaseModel<ServicoModel.Total>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, dados);
+        }*/
     }
 }

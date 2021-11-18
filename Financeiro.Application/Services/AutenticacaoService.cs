@@ -48,13 +48,13 @@ namespace Financeiro.Application.Services
             return new BaseModel<LoginModel.Dados>(sucesso: false, mensagem: Mensagens.LoginInvalido);
         }
 
-       /* public async Task<BaseModel<DadosUsuarioModel.Response>> BuscarDadosUsuario(DadosUsuarioModel.Request request)
+        public async Task<BaseModel<DadosUsuarioModel>> BuscarDadosUsuario(DadosUsuarioModel request)
 {
-            var query = await _autenticacaoRepository.BuscarDadosUsuario(request.Identificador);
-            var response = new DadosUsuarioModel.Response(query.NOME, query.EMAIL);
+            var query = await _autenticacaoRepository.BuscarDadosUsuario(_usuario.Email);
+            var response = new DadosUsuarioModel(query.NOME, query.EMAIL);
 
-            return new BaseModel<DadosUsuarioModel.Response>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, dados: response);
-        }*/
+            return new BaseModel<DadosUsuarioModel>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, dados: response);
+        }
 
         public async Task<BaseModel> CadastraUsuario(CadastroModel.Cadastro request)
         {
@@ -107,11 +107,6 @@ namespace Financeiro.Application.Services
 
             return resultado;
         }
-
-        /*private DadosUsuarioModel DadosUsuarioAdapter(DadosUsuario dados)
-        {
-            return new DadosUsuarioModel(dados.);
-        }*/
 
         private DadosUsuarioModel DadosUsuarioAdapter(DadosUsuario dados)
         {
