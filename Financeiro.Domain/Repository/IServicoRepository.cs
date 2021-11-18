@@ -8,5 +8,6 @@ namespace Financeiro.Domain.Repository
     {
         Task<IEnumerable<CadastroServico>> BuscarServicosUsuario(string email);
         Task<BaseEntity> CadastraServico(string email, string nomeServico, decimal custoServico, decimal valorCobrado);
+        Task<IEnumerable<TotalServico>> ListaTotalServicos(string email);
     }
 }

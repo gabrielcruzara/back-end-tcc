@@ -6325,23 +6325,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\cruza\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Luan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Data\\Financeiro.Data.csproj",
+      "projectUniqueName": "C:\\Users\\Luan\\source\\repos\\back-end-tcc\\Financeiro.Data\\Financeiro.Data.csproj",
       "projectName": "Financeiro.Data",
-      "projectPath": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Data\\Financeiro.Data.csproj",
-      "packagesPath": "C:\\Users\\cruza\\.nuget\\packages\\",
-      "outputPath": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Data\\obj\\",
+      "projectPath": "C:\\Users\\Luan\\source\\repos\\back-end-tcc\\Financeiro.Data\\Financeiro.Data.csproj",
+      "packagesPath": "C:\\Users\\Luan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Luan\\source\\repos\\back-end-tcc\\Financeiro.Data\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\cruza\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Luan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6355,8 +6351,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Domain\\Financeiro.Domain.csproj": {
-              "projectPath": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Domain\\Financeiro.Domain.csproj"
+            "C:\\Users\\Luan\\source\\repos\\back-end-tcc\\Financeiro.Domain\\Financeiro.Domain.csproj": {
+              "projectPath": "C:\\Users\\Luan\\source\\repos\\back-end-tcc\\Financeiro.Domain\\Financeiro.Domain.csproj"
             }
           }
         }
@@ -6421,7 +6417,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

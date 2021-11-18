@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Financeiro.Application",
+    "\\Financeiro.Application\\Model",
+    "\\Financeiro.Application\\Model\\Autenticacao",
+    "\\Financeiro.Application\\Services",
+    "\\Financeiro.Data",
+    "\\Financeiro.Data\\Repository",
+    "\\Financeiro.Domain",
+    "\\Financeiro.Domain\\Repository",
+    "\\Financeiro.Domain\\Servicos"
+  ],
+  "SelectedNode": "\\Financeiro.Application\\Services\\ServicoService.cs",
+  "PreviewInSolutionExplorer": false
+}

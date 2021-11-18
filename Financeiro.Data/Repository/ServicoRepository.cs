@@ -25,5 +25,10 @@ namespace Financeiro.Data.Repository
         {
             return await sqlConnection.QueryFirstOrDefaultAsync<BaseEntity>("SP_CADASTRA_SERVICO", new { EMAIL_USUARIO = email, NOME_SERVICO = nomeServico, CUSTO_SERVICO = custoServico, VALOR_COBRADO = valorCobrado }, commandType: CommandType.StoredProcedure);
         }
+
+         public async Task<IEnumerable<TotalServico>> ListaTotalServicos(string email)
+        {
+            return await sqlConnection.QueryAsync<TotalServico>("SP_TOTAL_DE_SERVICOS_POR_USUARIO", new { EMAIL_USUARIO = email }, commandType: CommandType.StoredProcedure);
+        }
     }
 }

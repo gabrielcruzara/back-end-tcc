@@ -57,5 +57,20 @@ namespace Financeiro.API.Controllers
                 return new StatusCodeResult(400);
             }
         }
+
+        [HttpGet("total-servico-usuario")]
+        public async Task<ActionResult<BaseModel<BuscarServicosModel.Response>>> TotalServicoUsuario()
+        {
+            try
+            {
+                var response = await _servicoService.BuscarServicosUsuario();
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, e.Message);
+                return new StatusCodeResult(400);
+            }
+        }
     }
 }
