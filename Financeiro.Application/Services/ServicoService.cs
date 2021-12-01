@@ -1,5 +1,6 @@
 ﻿using Financeiro.Application.Model;
 using Financeiro.Application.Model.Servicos;
+using Financeiro.Application.Model.Servicos.Relatorios;
 using Financeiro.Application.Services.Interfaces;
 using Financeiro.Application.Util;
 using Financeiro.Domain.Repository;
@@ -96,6 +97,71 @@ namespace Financeiro.Application.Services
             }
 
             return new BaseModel<List<ServicoModel.Execucao>>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, response);
+        }
+
+        public async Task<BaseModel> AdicionarServico(ServicoModel.AumentaDiminui request)
+        {
+            var query = await _servicoRepository.AdicionarServico(request.IdentificadorHistoricoServico);
+            var mensagem = new ValidationResult[] { new ValidationResult(query.MSG_ERRO) };
+
+            if (query.COD_ERRO != 0)
+            {
+                return new BaseModel(false, Mensagens.OperacaoRealizadaSemSucesso, null, mensagem);
+            }
+
+            return new BaseModel(true, Mensagens.OperacaoRealizadaComSucesso, null, mensagem);
+        }
+
+        public async Task<BaseModel> DiminuirServico(ServicoModel.AumentaDiminui request)
+        {
+            var query = await _servicoRepository.DiminuirServico(request.IdentificadorHistoricoServico);
+            var mensagem = new ValidationResult[] { new ValidationResult(query.MSG_ERRO) };
+
+            if (query.COD_ERRO != 0)
+            {
+                return new BaseModel(false, Mensagens.OperacaoRealizadaSemSucesso, null, mensagem);
+            }
+
+            return new BaseModel(true, Mensagens.OperacaoRealizadaComSucesso, null, mensagem);
+        }
+
+        public async Task<BaseModel> ConcluirServico(ServicoModel.ConcluirServico request)
+        {
+            var query = await _servicoRepository.ConcluirServico(request.IdentificadorHistoricoServico, request.Observacao, request.Quantidade);
+            var mensagem = new ValidationResult[] { new ValidationResult(query.MSG_ERRO) };
+
+            if (query.COD_ERRO != 0)
+            {
+                return new BaseModel(false, Mensagens.OperacaoRealizadaSemSucesso, null, mensagem);
+            }
+
+            return new BaseModel(true, Mensagens.OperacaoRealizadaComSucesso, null, mensagem);
+        }
+
+        public async Task<BaseModel> ExcluirExecucaoServico(ServicoModel.AumentaDiminui request)
+        {
+            var query = await _servicoRepository.ExcluirExecucaoServico(request.IdentificadorHistoricoServico);
+            var mensagem = new ValidationResult[] { new ValidationResult(query.MSG_ERRO) };
+
+            if (query.COD_ERRO != 0)
+            {
+                return new BaseModel(false, Mensagens.OperacaoRealizadaSemSucesso, null, mensagem);
+            }
+
+            return new BaseModel(true, Mensagens.OperacaoRealizadaComSucesso, null, mensagem);
+        }
+
+        public async Task<BaseModel<List<ServicosConcluidosModel>>> ListaServicosConcluido()
+        {
+            var response = new List<ServicosConcluidosModel>();
+            var servicos = await _servicoRepository.ListaServicosConcluido(_usuario.Email);
+
+            foreach (var servico in servicos)
+            {
+                response.Add(new ServicosConcluidosModel(servico));
+            }
+
+            return new BaseModel<List<ServicosConcluidosModel>>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, response);
         }
 
         /*public async Task<BaseModel<ServicoModel.Total>> TotalServicos()

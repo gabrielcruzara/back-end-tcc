@@ -19,5 +19,15 @@ namespace Financeiro.Domain.Repository
         Task<IEnumerable<Execucao>> ServicoExecucao(string email);
 
         Task<TotalServico> TotalServicos(string email);
+
+        Task<BaseEntity> AdicionarServico(int identificadorHistoricoServico);
+
+        Task<BaseEntity> DiminuirServico(int identificadorHistoricoServico);
+
+        Task<BaseEntity> ConcluirServico(int identificadorHistoricoServico, string observacao, int quantidade);
+
+        Task<BaseEntity> ExcluirExecucaoServico(int identificadorHistoricoServico);
+
+        Task<IEnumerable<ServicosConcluidos>> ListaServicosConcluido(string email);
     }
 }

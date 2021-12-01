@@ -49,5 +49,30 @@ namespace Financeiro.Data.Repository
         {
             return await sqlConnection.QueryFirstOrDefaultAsync<TotalServico>("SP_TOTAL_DE_SERVICOS_POR_USUARIO", new { EMAIL_USUARIO = email }, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<BaseEntity> AdicionarServico(int identificadorHistoricoServico)
+        {
+            return await sqlConnection.QueryFirstOrDefaultAsync<BaseEntity>("SP_AUMENTA_QUANTIDADE_SERVICO", new { ID_HISTORICO_SERVICO = identificadorHistoricoServico }, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<BaseEntity> DiminuirServico(int identificadorHistoricoServico)
+        {
+            return await sqlConnection.QueryFirstOrDefaultAsync<BaseEntity>("SP_DIMINUI_QUANTIDADE_SERVICO", new { ID_HISTORICO_SERVICO = identificadorHistoricoServico }, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<BaseEntity> ConcluirServico(int identificadorHistoricoServico, string observacao, int quantidade)
+        {
+            return await sqlConnection.QueryFirstOrDefaultAsync<BaseEntity>("SP_CONCLUI_SERVICO_EM_EXECUCAO", new { ID_HISTORICO_SERVICO = identificadorHistoricoServico, OBSERVACAO = observacao, QUANTIDADE = quantidade}, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<BaseEntity> ExcluirExecucaoServico(int identificadorHistoricoServico)
+        {
+            return await sqlConnection.QueryFirstOrDefaultAsync<BaseEntity>("SP_EXCLUI_EXECUCAO_SERVICO", new { ID_HISTORICO_SERVICO = identificadorHistoricoServico}, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<ServicosConcluidos>> ListaServicosConcluido(string email)
+        {
+            return await sqlConnection.QueryAsync<ServicosConcluidos>("SP_LISTA_SERVICOS_CONCLUIDOS", new { EMAIL_USUARIO = email }, commandType: CommandType.StoredProcedure);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Financeiro.Application.Model;
 using Financeiro.Application.Model.Servicos;
+using Financeiro.Application.Model.Servicos.Relatorios;
 using Financeiro.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -106,6 +107,81 @@ namespace Financeiro.API.Controllers
             try
             {
                 var response = await _servicoService.ServicoExecucao();
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, e.Message);
+                return new StatusCodeResult(400);
+            }
+        }
+
+        [HttpPut("aumentar-servico")]
+        public async Task<ActionResult<BaseModel>> AdicionarServico([FromBody] ServicoModel.AumentaDiminui request)
+        {
+            try
+            {
+                var response = await _servicoService.AdicionarServico(request);
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, e.Message, request);
+                return new StatusCodeResult(400);
+            }
+        }
+
+        [HttpDelete("diminuir-servico")]
+        public async Task<ActionResult<BaseModel>> DiminuirServico([FromQuery] ServicoModel.AumentaDiminui request)
+        {
+            try
+            {
+                var response = await _servicoService.DiminuirServico(request);
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, e.Message, request);
+                return new StatusCodeResult(400);
+            }
+        }
+
+        [HttpPut("concluir-servico")]
+        public async Task<ActionResult<BaseModel>> ConcluirServico([FromBody] ServicoModel.ConcluirServico request)
+        {
+            try
+            {
+                var response = await _servicoService.ConcluirServico(request);
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, e.Message, request);
+                return new StatusCodeResult(400);
+            }
+        }
+
+        [HttpDelete("excluir-servico-execucao")]
+        public async Task<ActionResult<BaseModel>> ExcluirExecucaoServico([FromQuery] ServicoModel.AumentaDiminui request)
+        {
+            try
+            {
+                var response = await _servicoService.ExcluirExecucaoServico(request);
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, e.Message, request);
+                return new StatusCodeResult(400);
+            }
+        }
+
+        [HttpGet("lista-servicos-concluidos")]
+        public async Task<ActionResult<BaseModel<ServicosConcluidosModel>>> ListaServicosConcluido()
+        {
+            try
+            {
+                var response = await _servicoService.ListaServicosConcluido();
                 return Ok(response);
             }
             catch (Exception e)

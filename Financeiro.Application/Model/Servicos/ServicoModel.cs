@@ -40,5 +40,17 @@ namespace Financeiro.Application.Model.Servicos
 
             public int QuantidadeServico { get; set; }
         }
+
+        public partial class AumentaDiminui
+        {
+            public int IdentificadorHistoricoServico { get; set; }
+        }
+
+        public partial class ConcluirServico
+        {
+            public int IdentificadorHistoricoServico { get; set; }
+            public string Observacao { get; set; }
+            public int Quantidade { get; set; }
+        }
     }
 }
