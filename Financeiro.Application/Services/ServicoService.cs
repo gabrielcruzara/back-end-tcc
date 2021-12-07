@@ -1,5 +1,6 @@
 ﻿using Financeiro.Application.Model;
 using Financeiro.Application.Model.Servicos;
+using Financeiro.Application.Model.Servicos.Dashboard;
 using Financeiro.Application.Model.Servicos.Relatorios;
 using Financeiro.Application.Services.Interfaces;
 using Financeiro.Application.Util;
@@ -162,6 +163,19 @@ namespace Financeiro.Application.Services
             }
 
             return new BaseModel<List<ServicosConcluidosModel>>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, response);
+        }
+
+        public async Task<BaseModel<List<GraficoGanhoDespesaModel>>> ListaGanhosDespesas()
+        {
+            var response = new List<GraficoGanhoDespesaModel>();
+            var servicos = await _servicoRepository.ListaGanhosDespesas(_usuario.Email);
+
+            foreach (var servico in servicos)
+            {
+                response.Add(new GraficoGanhoDespesaModel(servico));
+            }
+
+            return new BaseModel<List<GraficoGanhoDespesaModel>>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, response);
         }
 
         /*public async Task<BaseModel<ServicoModel.Total>> TotalServicos()

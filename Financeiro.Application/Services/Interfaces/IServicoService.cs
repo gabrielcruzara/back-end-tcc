@@ -1,5 +1,6 @@
 ﻿using Financeiro.Application.Model;
 using Financeiro.Application.Model.Servicos;
+using Financeiro.Application.Model.Servicos.Dashboard;
 using Financeiro.Application.Model.Servicos.Relatorios;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -29,6 +30,8 @@ namespace Financeiro.Application.Services.Interfaces
         Task<BaseModel> ExcluirExecucaoServico(ServicoModel.AumentaDiminui request);
 
         Task<BaseModel<List<ServicosConcluidosModel>>> ListaServicosConcluido();
+
+        Task<BaseModel<List<GraficoGanhoDespesaModel>>> ListaGanhosDespesas();
 
         //Task<BaseModel<ServicoModel.Total>> TotalServicos();
     }

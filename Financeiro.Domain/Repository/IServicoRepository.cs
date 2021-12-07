@@ -29,5 +29,7 @@ namespace Financeiro.Domain.Repository
         Task<BaseEntity> ExcluirExecucaoServico(int identificadorHistoricoServico);
 
         Task<IEnumerable<ServicosConcluidos>> ListaServicosConcluido(string email);
+
+        Task<IEnumerable<GraficoGanhoDespesa>> ListaGanhosDespesas(string email);
     }
 }

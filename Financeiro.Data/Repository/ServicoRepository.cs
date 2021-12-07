@@ -74,5 +74,10 @@ namespace Financeiro.Data.Repository
         {
             return await sqlConnection.QueryAsync<ServicosConcluidos>("SP_LISTA_SERVICOS_CONCLUIDOS", new { EMAIL_USUARIO = email }, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<GraficoGanhoDespesa>> ListaGanhosDespesas(string email)
+        {
+            return await sqlConnection.QueryAsync<GraficoGanhoDespesa>("SP_DASH_TOTAL_MENSAL", new { EMAIL_USUARIO = email }, commandType: CommandType.StoredProcedure);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Financeiro.Application.Model;
 using Financeiro.Application.Model.Servicos;
+using Financeiro.Application.Model.Servicos.Dashboard;
 using Financeiro.Application.Model.Servicos.Relatorios;
 using Financeiro.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -182,6 +183,21 @@ namespace Financeiro.API.Controllers
             try
             {
                 var response = await _servicoService.ListaServicosConcluido();
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, e.Message);
+                return new StatusCodeResult(400);
+            }
+        }
+
+        [HttpGet("lista-ganhos-despesas")]
+        public async Task<ActionResult<BaseModel<GraficoGanhoDespesaModel>>> ListaGanhosDespesas()
+        {
+            try
+            {
+                var response = await _servicoService.ListaGanhosDespesas();
                 return Ok(response);
             }
             catch (Exception e)
