@@ -1,16 +1,12 @@
-﻿using Financeiro.Domain;
-
-namespace Financeiro.Application.Model.Autenticacao
+﻿namespace Financeiro.Application.Model.Autenticacao
 {
     public class AlterarSenha
     {
-        public class Request
+        public class Altera
         {
-            public string Login { get; set; }
+            public string Email { get; set; }
             public string SenhaAtual { get; set; }
             public string NovaSenha { get; set; }
-            public string CPF { get; set; }
-            public string DataNascimento { get; set; }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Financeiro.Domain.Servicos;
+﻿using Financeiro.Domain.Dashboard;
+using Financeiro.Domain.Servicos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,9 +9,9 @@ namespace Financeiro.Domain.Repository
     {
         Task<IEnumerable<CadastroServico>> BuscarServicosUsuario(string email);
 
-        Task<BaseEntity> CadastraServico(string email, string nomeServico, decimal custoServico, decimal valorCobrado);
+        Task<BaseEntity> CadastraServico(string email, string nomeServico, decimal? custoServico, decimal? valorCobrado);
 
-        Task<BaseEntity> EditarServico(int identificadorServico, string nomeServico, decimal custoServico, decimal valorCobrado);
+        Task<BaseEntity> EditarServico(int identificadorServico, string nomeServico, decimal? custoServico, decimal? valorCobrado);
 
         Task<BaseEntity> ExcluirServico(int identificadorServico);
 
@@ -18,7 +19,7 @@ namespace Financeiro.Domain.Repository
 
         Task<IEnumerable<Execucao>> ServicoExecucao(string email);
 
-        Task<TotalServico> TotalServicos(string email);
+        Task<IEnumerable<TotalServico>> TotalServicos(string email);
 
         Task<BaseEntity> AdicionarServico(int identificadorHistoricoServico);
 
@@ -28,8 +29,16 @@ namespace Financeiro.Domain.Repository
 
         Task<BaseEntity> ExcluirExecucaoServico(int identificadorHistoricoServico);
 
+        #region Relatórios
+
         Task<IEnumerable<ServicosConcluidos>> ListaServicosConcluido(string email);
 
+        #endregion
+
+        #region Dashboard
         Task<IEnumerable<GraficoGanhoDespesa>> ListaGanhosDespesas(string email);
+
+        Task<IEnumerable<LucroMensal>> BuscaLucroMensal(string email);
+        #endregion
     }
 }

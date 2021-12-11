@@ -11,6 +11,8 @@ namespace Financeiro.Application.Services.Interfaces
     {
         Task<BaseModel<List<BuscarServicosModel.Response>>> BuscarServicosUsuario();
 
+        Task<BaseModel<List<ServicoModel.Total>>> TotalServicos();
+
         Task<BaseModel> CadastraServico(CadastroServicoModel.Request request);
 
         Task<BaseModel> EditarServico(CadastroServicoModel.Request request);
@@ -33,6 +35,6 @@ namespace Financeiro.Application.Services.Interfaces
 
         Task<BaseModel<List<GraficoGanhoDespesaModel>>> ListaGanhosDespesas();
 
-        //Task<BaseModel<ServicoModel.Total>> TotalServicos();
+        Task<BaseModel<List<LucroMensalModel>>> BuscaLucroMensal();
     }
 }

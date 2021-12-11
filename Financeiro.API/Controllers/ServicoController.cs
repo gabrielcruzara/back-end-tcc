@@ -27,6 +27,21 @@ namespace Financeiro.API.Controllers
             _logger = logger;
         }
 
+        [HttpGet("busca-total")]
+        public async Task<ActionResult<BaseModel<ServicoModel.Total>>> TotalServicos()
+        {
+            try
+            {
+                var response = await _servicoService.TotalServicos();
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, e.Message);
+                return new StatusCodeResult(400);
+            }
+        }
+
         [HttpGet("buscar-servicos")]
         public async Task<ActionResult<BaseModel<BuscarServicosModel.Response>>> BuscarServicosUsuario()
         {
@@ -192,6 +207,7 @@ namespace Financeiro.API.Controllers
             }
         }
 
+        #region Dashboard
         [HttpGet("lista-ganhos-despesas")]
         public async Task<ActionResult<BaseModel<GraficoGanhoDespesaModel>>> ListaGanhosDespesas()
         {
@@ -206,5 +222,21 @@ namespace Financeiro.API.Controllers
                 return new StatusCodeResult(400);
             }
         }
+
+        [HttpGet("busca-lucro-mensal")]
+        public async Task<ActionResult<BaseModel<LucroMensalModel>>> BuscaLucroMensal()
+        {
+            try
+            {
+                var response = await _servicoService.BuscaLucroMensal();
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, e.Message);
+                return new StatusCodeResult(400);
+            }
+        }
+        #endregion
     }
 }

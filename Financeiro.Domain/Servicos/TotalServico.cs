@@ -2,6 +2,8 @@
 {
     public class TotalServico
     {
-        public int QTDSERVICOS { get; set; }
+        public string QTDSERVICOSCADASTRADOS { get; set; }
+        public string QTDSERVICOSCONCLUIDOS { get; set; }
+        public string QTDSERVICOSEMEXECUCAO { get; set; }
     }
 }

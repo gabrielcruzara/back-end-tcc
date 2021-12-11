@@ -9,5 +9,7 @@ namespace Financeiro.Application.Services.Interfaces
         Task<BaseModel<LoginModel.Dados>> Autenticar(LoginModel.Login request);
 
         Task<BaseModel> CadastraUsuario(CadastroModel.Cadastro request);
+
+        Task<BaseModel> AlterarSenha(AlterarSenha.Altera request);
     }
 }

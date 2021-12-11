@@ -35,10 +35,14 @@ namespace Financeiro.Application.Model.Servicos
         {
             public Total(TotalServico servico)
             {
-                QuantidadeServico = servico.QTDSERVICOS;
+                QuantidadeServicosCadastrados = servico.QTDSERVICOSCADASTRADOS;
+                QuantidadeServicosConcluidos = servico.QTDSERVICOSCONCLUIDOS;
+                QuantidadeServicosExecucao = servico.QTDSERVICOSEMEXECUCAO;
             }
 
-            public int QuantidadeServico { get; set; }
+            public string QuantidadeServicosCadastrados { get; set; }
+            public string QuantidadeServicosConcluidos { get; set; }
+            public string QuantidadeServicosExecucao { get; set; }
         }
 
         public partial class AumentaDiminui

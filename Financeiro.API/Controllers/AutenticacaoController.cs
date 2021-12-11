@@ -44,6 +44,21 @@ namespace Financeiro.API.Controllers
         }
         //coment
 
+        [HttpPost("altera-senha")]
+        public async Task<ActionResult<BaseModel>> AlterarSenha([FromBody] AlterarSenha.Altera request)
+        {
+            try
+            {
+                var response = await _autenticacaoService.AlterarSenha(request);
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, e.Message, request);
+                return new StatusCodeResult(400);
+            }
+        }
+
         [HttpPost("cadastrar-usuario")]
         public async Task<ActionResult<BaseModel>> CadastraUsuario([FromBody] CadastroModel.Cadastro request)
         {

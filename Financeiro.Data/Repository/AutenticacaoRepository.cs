@@ -29,5 +29,10 @@ namespace Financeiro.Data.Repository
         {
             return await sqlConnection.QueryFirstOrDefaultAsync<BaseEntity>("SP_CADASTRA_USUARIO", new { EMAIL = email, NOME = nome, SENHA = senha }, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<BaseEntity> AlterarSenha(string email, string senhaAntiga, string senhaNova)
+        {
+            return await sqlConnection.QueryFirstOrDefaultAsync<BaseEntity>("SP_ALTERA_SENHA", new { EMAIL = email, SENHA_ANTIGA = senhaAntiga, SENHA_NOVA = senhaNova }, commandType: CommandType.StoredProcedure);
+        }
     }
 }

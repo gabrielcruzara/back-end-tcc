@@ -56,6 +56,19 @@ namespace Financeiro.Application.Services
             return new BaseModel<DadosUsuarioModel>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, dados: response);
         }
 
+        public async Task<BaseModel> AlterarSenha(AlterarSenha.Altera request)
+        {
+            var altera = await _autenticacaoRepository.AlterarSenha(request.Email, request.SenhaAtual, request.NovaSenha);
+            var mensagem = new ValidationResult[] { new ValidationResult(altera.MSG_ERRO) };
+
+            if (altera.COD_ERRO != 0)
+            {
+                return new BaseModel(false, Mensagens.OperacaoRealizadaSemSucesso, null, mensagem);
+            }
+
+            return new BaseModel(true, Mensagens.OperacaoRealizadaComSucesso, null, mensagem);
+        }
+
         public async Task<BaseModel> CadastraUsuario(CadastroModel.Cadastro request)
         {
             var query = await _autenticacaoRepository.CadastraUsuario(request.Email, request.Nome, request.Senha);

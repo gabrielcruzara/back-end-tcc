@@ -35,6 +35,19 @@ namespace Financeiro.Application.Services
             return new BaseModel<List<BuscarServicosModel.Response>>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, response);
         }
 
+        public async Task<BaseModel<List<ServicoModel.Total>>> TotalServicos()
+        {
+            var response = new List<ServicoModel.Total>();
+            var query = await _servicoRepository.TotalServicos(_usuario.Email);
+
+            foreach (var servico in query)
+            {
+                response.Add(new ServicoModel.Total(servico));
+            }
+
+            return new BaseModel<List<ServicoModel.Total>>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, response);
+        }
+
         public async Task<BaseModel> CadastraServico(CadastroServicoModel.Request request)
         {
             var query = await _servicoRepository.CadastraServico(_usuario.Email, request.NomeServico, request.CustoServico, request.ValorCobrado);
@@ -165,6 +178,7 @@ namespace Financeiro.Application.Services
             return new BaseModel<List<ServicosConcluidosModel>>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, response);
         }
 
+        #region Dashboard
         public async Task<BaseModel<List<GraficoGanhoDespesaModel>>> ListaGanhosDespesas()
         {
             var response = new List<GraficoGanhoDespesaModel>();
@@ -178,15 +192,18 @@ namespace Financeiro.Application.Services
             return new BaseModel<List<GraficoGanhoDespesaModel>>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, response);
         }
 
-        /*public async Task<BaseModel<ServicoModel.Total>> TotalServicos()
+        public async Task<BaseModel<List<LucroMensalModel>>> BuscaLucroMensal()
         {
-            var dados = new ServicoModel();
+            var response = new List<LucroMensalModel>();
+            var servicos = await _servicoRepository.BuscaLucroMensal(_usuario.Email);
 
-            var query = await _servicoRepository.TotalServicos(_usuario.Email);
+            foreach (var servico in servicos)
+            {
+                response.Add(new LucroMensalModel(servico));
+            }
 
-            new ServicoModel.Total(query.QTDSERVICOS);
-
-            return new BaseModel<ServicoModel.Total>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, dados);
-        }*/
+            return new BaseModel<List<LucroMensalModel>>(sucesso: true, mensagem: Mensagens.OperacaoRealizadaComSucesso, response);
+        }
+        #endregion
     }
 }
