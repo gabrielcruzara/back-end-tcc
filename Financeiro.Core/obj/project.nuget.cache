@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WTNC5NEZCyezFaC8IKHf7gTRogcpcmjqxlGoj3iJ8KCu0hmngBqqGbiPbKxrajmfsM8I9UcvhZ++vaAA69a4Cg==",
+  "dgSpecHash": "+1vzM7GStq9HIWsRLVco4cg7uSSjPWqzs0FCg+RQl5TtaJMk7xAcVRJHtk+9t+qh7HmkgbSfm6yHEsQXJB19aA==",
   "success": true,
-  "projectFilePath": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Core\\Financeiro.Core.csproj",
+  "projectFilePath": "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Core\\Financeiro.Core.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

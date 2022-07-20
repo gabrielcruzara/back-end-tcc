@@ -1,23 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Application\\Financeiro.Application.csproj": {}
+    "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Application\\Financeiro.Application.csproj": {}
   },
   "projects": {
-    "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Application\\Financeiro.Application.csproj": {
+    "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Application\\Financeiro.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Application\\Financeiro.Application.csproj",
+        "projectUniqueName": "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Application\\Financeiro.Application.csproj",
         "projectName": "Financeiro.Application",
-        "projectPath": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Application\\Financeiro.Application.csproj",
-        "packagesPath": "C:\\Users\\cruza\\.nuget\\packages\\",
-        "outputPath": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Application\\obj\\",
+        "projectPath": "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Application\\Financeiro.Application.csproj",
+        "packagesPath": "C:\\Users\\gwaltrinck\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\cruza\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gwaltrinck\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -31,11 +33,11 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Core\\Financeiro.Core.csproj": {
-                "projectPath": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Core\\Financeiro.Core.csproj"
+              "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Core\\Financeiro.Core.csproj": {
+                "projectPath": "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Core\\Financeiro.Core.csproj"
               },
-              "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Domain\\Financeiro.Domain.csproj": {
-                "projectPath": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Domain\\Financeiro.Domain.csproj"
+              "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Domain\\Financeiro.Domain.csproj": {
+                "projectPath": "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Domain\\Financeiro.Domain.csproj"
               }
             }
           }
@@ -82,24 +84,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Core\\Financeiro.Core.csproj": {
+    "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Core\\Financeiro.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Core\\Financeiro.Core.csproj",
+        "projectUniqueName": "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Core\\Financeiro.Core.csproj",
         "projectName": "Financeiro.Core",
-        "projectPath": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Core\\Financeiro.Core.csproj",
-        "packagesPath": "C:\\Users\\cruza\\.nuget\\packages\\",
-        "outputPath": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Core\\obj\\",
+        "projectPath": "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Core\\Financeiro.Core.csproj",
+        "packagesPath": "C:\\Users\\gwaltrinck\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\cruza\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gwaltrinck\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -139,24 +143,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Domain\\Financeiro.Domain.csproj": {
+    "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Domain\\Financeiro.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Domain\\Financeiro.Domain.csproj",
+        "projectUniqueName": "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Domain\\Financeiro.Domain.csproj",
         "projectName": "Financeiro.Domain",
-        "projectPath": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Domain\\Financeiro.Domain.csproj",
-        "packagesPath": "C:\\Users\\cruza\\.nuget\\packages\\",
-        "outputPath": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Domain\\obj\\",
+        "projectPath": "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Domain\\Financeiro.Domain.csproj",
+        "packagesPath": "C:\\Users\\gwaltrinck\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\cruza\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gwaltrinck\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -170,8 +176,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Core\\Financeiro.Core.csproj": {
-                "projectPath": "D:\\Dev\\back-end-tcc\\Financeiro.API\\Financeiro.Core\\Financeiro.Core.csproj"
+              "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Core\\Financeiro.Core.csproj": {
+                "projectPath": "C:\\Dev\\.NET\\back-end-tcc\\Financeiro.Core\\Financeiro.Core.csproj"
               }
             }
           }
@@ -200,7 +206,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
